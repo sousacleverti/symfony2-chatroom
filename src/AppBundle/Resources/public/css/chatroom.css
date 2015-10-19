@@ -1,0 +1,977 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 14/Out/2015, 8:14:24
+    Author     : sousa
+*/
+
+html, body{
+    outline: none;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    background-color: rgb(245,245,245);
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+  list-style: none;
+  background:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEu0lEQVR4nMWXS2xVVRSGv7X3uT23jyuBggYnSEsFBiIDE8AX6oj44BFQiQkxig6MYaAQFDQBI+WhicQY44D4SDQhgNaEONGJEjUhJkbURIi1GiY+0AYKLe295+y1HJzbUnp726Mpuid/cs761/r32mvvtTf8z0P+DanziwUPqfIwxg1VL987xzvP3Xrq4BUVsPvLhVcniR2LY1lQbPE4n33XAEMDgfKQnWqIZfm2ZSfPTLmAzi/nl9KK/NIy3bcWCg4b60ggqSj9Z0NvIZa5228+eSGPX5dXQDrEkaaSb/WRoKpqQbFwCTVVfCTaVPKtyZAeyes3VwZePLbgRrATpRkRaoIAViWPRRHjQm+KOFn8/O2nvp3Md64MaMqGuNGjaioGaloXTYW4yZMmbMjjO8pjFFSX+siDictm6iZEFwmmunTKBFjKLABTVQwHKNRBwQmCVjlTIgCjP6ghkmWAS0tXg2JgZiD053GdqwYM+y6ULctAAEJ9NIVQNszkuykTgHCkfDFgiDN0EjTKFwMi+bZi7oPo2aMdPdNaozbxAqiCc+OhBXF9venPe1d2t+fxm/sgirys6+tNUTVMnTOlBlXF9fWmRJGszes3t4Bd9/z4jRNbcf6PRCuDKaYGZooZpmaVwZTzvyfqxFbsuvvHE3n9TroEz3zYcQtwrXN8sGdVt2472jEzBHsJY4OLsl2kKSnCu1EkW3ff1/1Xxpu3CaTsHB/vWdV9+h8L2NrV/pgFXmso+iIOKoPh65fX9dw02mb7Rx2zAXbf2/3b6O9b3m/vKjb6NeKgUlZCYp9EBbl/7+qfzucSsPlw+1tRgzzSPM2DCCIwcC7FUnt039qetydIGFu75i3BOF6a6TEVRIzKkDHQF/4sxDJ/3+qfzo62r6mBLYfm7fCFLLipqaWgqWqx2VOp0DlRcIC0bPuLJY+mUu2SQtQg2jzNz0oG7bOx9pcJ2HK4/XqzsLPpKo8GMKvubxOHQNTA7M1H2lbWC77lcNtiF7HM+2p9Dp8PiosKQiFm0eZDbRvrCkgTe7VYirI+r9nZbyoZBoibPKHMjrqzr9AZNzo0jOJVUQPEzZ6Q8MJozkgNPHVw7mxUfi3NjFAdvzbFGQNnA8Adr6zvOTb639MH2xeZ2bel1on4MHguJRhL9q/v+eqyDGjggajRYQqGqqC1qGhjiyMt64GxzisVfbdY8pPwTX0DWKIjyzjSDUPKnVEkqAImLmTpqUGcEDf6jk3vzO2KCvKggaQVey9ulEXOQwgg1OELzkWOoLqkRoAZ852AGgyf7TYeqnOFZlEVv6YyEC4CxC0+KjYJWeXI+DycM1N1Ik5T2moFBJtuBmIKJi67Y9THOBaKxSiqisfSbOYT8qr3CTNrGY47UgNmDJoZZoKhakyCBqqqqmCmajA5z1SzGFysyQBwPKnYdVFByForVwTTREE4XpMB72Vn/7mQtVtMzaozmyoEVI3+cwHvZedw3Ms27JNvzlmeJHTFscyI4uzpJT57B4xYjn0SjR2j7AywYGiAtBwol623UGDd6xtPfzaugOHxxIE5t6HcZbDQjGuAJowiUKheNuu9SwyjCQgICXBBhDMCP+D49I3HT38+ifz/fvwNvh41zTuaYPQAAAAASUVORK5CYII=) no-repeat 0% 50%;
+    background-size: 20px 20px;
+    margin: 0px 0px 15px -20px;
+    padding-left: 30px;
+}
+
+#ConversationTabsWrapper{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:auto;
+}
+
+.PrivateTab {
+    position:relative;
+    width: 175px;
+    height: 28px;
+    padding:5px;
+    display:block;
+    float:left;
+    border: 1px solid rgb(177, 193, 213);
+}
+
+.PrivateTabRegular {
+    background-color:#fff;
+    color: rgb(59, 89, 152);
+    cursor:pointer;
+}
+
+.PrivateTabRegular:hover {
+    background-color:#ddd;
+}
+
+.PrivateTabFocused {
+    background-color:rgb(108,147,210) !important;
+    color:#fff;
+}
+
+.TabAvatarWrapper {
+    background-color:#fff;
+    float:left;
+    width:24px;
+    height:24px;
+    padding:2px;
+    border-radius:2px;
+}
+
+.TabAvatar {
+    width:100%;
+    height:100%;
+}
+
+.TabUsername {
+    float: left;
+    margin-left: 5px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    max-width:110px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.TabEnvelopeIcon {
+    visibility:hidden;
+    width:16px;
+    height:11px;
+    margin-top:12px;
+    float:left;
+    margin-left:6px;
+}
+
+.TabOnlineIcon {
+    margin-top: 15px;
+    width: 8px;
+    height: 8px;
+    float: right;
+}
+
+.TabCloseButton {
+    cursor:pointer;
+    position:absolute;
+    top:2px;
+    right:2px;
+    padding:2px;
+ }
+
+  #echat-shared-emoticons-panel {
+    visibility:hidden;
+    position:absolute;
+    width:214px;
+    height:auto;
+    border:1px solid #000;
+    background-color:#fff;
+    z-index:2;
+  }
+
+.echat-website-emoticons-panel {
+    bottom: 35px;
+    left: 50%;
+    margin-left: 220px;
+}
+
+.echat-widget-emoticons-panel {
+    bottom: 25px;
+    right: 70px;
+}
+
+#echat-shared-emoticons-panel-relative {
+    text-align:left;
+    padding:5px;
+    position:relative;
+}
+
+#echat-shared-emoticons-panel-label {
+    height:20px;
+    margin-bottom:5px;
+    border:0px solid;
+    border-bottom: 1px solid #4b79A1;
+    color: #4b79A1;
+    font-size:13px;
+    font-weight:bold;
+    font-family:Verdana, Geneva, sans-serif;
+    text-align:left;
+    padding-top:3px;
+    display:block;
+}
+
+#echat-shared-emoticons-panel-close{
+    width:10px; height:10px;
+    position:absolute;
+    top:7px;
+    right:5px;
+    cursor:pointer;}
+
+.echat-shared-emoticons-unit-canvas{
+    cursor: pointer;
+    margin: 1px;
+    height: 20px;
+    width:20px;
+    display: inline-block;}
+
+.echat-shared-emoticons-unit-canvas:hover{
+    background-color:#ddd;}
+
+.echat-shared-chat-message-wrapper{
+    font-family:Verdana, Geneva, sans-serif;
+    text-align:left;
+    width:100%;
+    overflow:hidden;
+    margin:0px;
+    font-size:120%;
+    clear:both;}
+
+.echat-shared-chat-message-wrapper-self{
+    background-color: rgb(242, 228, 200);}
+
+.echat-shared-chat-message-avatar{
+    cursor:pointer;
+    display:block;
+    border-radius:2px; 
+    width:34px; height:34px;
+    margin:5px 5px 0px 5px;
+    float:left;}
+
+.echat-shared-chat-message-top-wrapper{
+    margin-left:44px;
+    margin-top:3px;
+    height:14px;
+    width:auto;
+    overflow:hidden;}
+
+.echat-shared-chat-message-username{
+    white-space:pre;
+    cursor:pointer;
+    font-family:Verdana, Geneva, sans-serif;
+    float:left;
+    font-size:11px;
+    font-weight: bold;
+    color:rgb(59, 89, 152);}
+
+.echat-shared-chat-message-username:hover{
+    text-decoration:underline;}
+
+.echat-shared-chat-message-time{
+    margin-top:1px;
+    float:left;
+    color: rgb(137, 137, 137);
+    font-weight:normal;
+    font-size:9px;
+    margin-left:3px;}
+
+.echat-shared-chat-message-body{
+    margin-top:4px;
+    margin-left:5px;
+    font-size:15px;
+    text-align:left;
+    word-wrap:break-word;
+    margin-bottom:5px;}
+
+.echat-shared-chat-moderator-icon{
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-left: 3px;
+    margin-top:1px;}
+
+.echat-shared-chat-message-icon{
+    width: 17px;
+    height: 17px;
+    margin-bottom: -2px;}
+
+
+/* Emoticon toggle button classes */
+.InputTextOptionButton{
+    cursor: pointer;
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-right:3px;}
+
+.InputTextOptionButton:hover{
+    background-color:#ddd;}
+
+.InputTextOptionIcon {
+    width:16px; height:16px;
+    margin:2px;
+}
+
+/* Notification area where errors are displayed etc */
+#NotificationArea{
+    height:100%;
+    float:left;
+    display:inline-block;
+    color: rgb(136,99,21);
+    font-size: 12px;
+    font-style: italic;
+    text-align: left;
+    font-weight: bold;}
+
+    #PrivateNotificationsAbsoluteWrapper{
+    display:none;
+    position:absolute;
+    top:0px;
+    left:0px;
+    border:1px solid #000;
+    width:400px;
+    height:154px;
+    background-color:#fff;
+    z-index:20;}
+
+#PrivateNotificationsRelativeWrapper{
+    width:100%;
+    height:100%;
+    position:relative;}
+
+#PrivateNotificationsPopupClose{
+    position: absolute;
+    top:5px;
+    right:5px;
+    cursor:pointer;}
+
+#PrivateNotificationsTitle{
+    position:absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:20px;
+    padding-top: 5px;
+    margin: 0px 0px 5px 0px;
+    text-align: left;
+    color: #4b79A1;
+    font-weight: bold;
+    border-bottom: 1px solid #4b79A1;
+    font-family:verdana, geneva, sans-serif;
+    padding-left:5px;}
+
+#PrivateNotificationsLoadingArea{
+    position:absolute;
+    top:50px;
+    left:0px;
+    right:0px;
+    text-align:center;
+    height:50px;}
+
+#PrivateNotificationsEmptyWrapper{
+    position:absolute;
+    top:26px;
+    left:0px;
+    right:0px;
+    height: 20px;
+    padding:5px;
+    font-size:14px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    color: rgb(136,99,21);}
+
+#PrivateNotificationsList{
+    position:absolute;
+    top:26px;
+    left:0px;
+    right:0px;
+    overflow-y:scroll;
+    height:128px;}
+
+.PrivateNotificationUnitWrapper{
+    position:relative;
+    width:100%;
+    height:32px;}
+
+.PrivateNotificationUserWrapper{
+    cursor:pointer;
+    position:absolute;
+    left:0px;
+    right:64px;
+    top:0px;
+    bottom:0px;}
+
+.PrivateNotificationUserWrapper:hover{
+    background-color:#ddd;}
+
+.PrivateNotificationOnlineIconLeft{
+    width: 8px;
+    height: 8px;
+    float: left;
+    margin-top: 11px;
+    margin-left: 5px;}
+
+.PrivateNotificationOptionButtonWrapper{
+    cursor:pointer;
+    width:10px;
+    height:10px;
+    padding:11px;
+    float:right;}
+
+.PrivateNotificationOptionButtonWrapper:hover{
+    background-color:#ddd}
+
+.PrivateNotificationOptionButtonIcon{
+    display:block;
+    width:10px;
+    height:10px;}
+
+.PrivateNotificationOptionButtonWrapper2{
+    cursor:pointer;
+    width:16px;
+    height:16px;
+    padding:8px;
+    float:right;}
+
+.PrivateNotificationOptionButtonWrapper2:hover{
+    background-color:#ddd;}
+
+.PrivateNotificationOptionButtonIcon2{
+    display:block;
+    width:16px;
+    height:16px;}
+
+    #Footer{
+    text-align: center;
+    position: absolute;
+    height: 25px;
+    bottom: 0px;
+    left: 0px;
+    min-width: 1000px;
+    width: 100%;
+    background-color: rgb(220,220,220);
+    border-top: 1px solid rgb(200,200,200);
+}
+
+#Footer a {
+  display: inline-block;
+    margin: 5px 10px;
+    color: rgb(100,100,100);
+    font-size: 12px;
+    font-family: arial,geneva,sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#Footer a:hover {
+    text-decoration:underline;
+}
+
+#Header{
+    width:100%;
+    min-width:1000px;
+    height:40px;
+    overflow: hidden;
+    margin: 0px auto;
+    position: absolute;
+    top:0px; left:0px;
+    background-color:rgb(220,220,220);
+    border-bottom:1px solid rgb(200,200,200);}
+
+#HeaderRelativeWrapper{
+    width:1000px;
+    height:100%;
+    margin:0px auto;
+    position:relative;}
+
+#HeaderUserArea{
+    cursor:pointer;
+    width:auto;
+    max-width:300px;
+    height:100%;
+    padding: 0px 11px;
+    float:left;
+}
+
+#HeaderUserArea:hover{
+    background-color:rgb(200,200,200);
+}
+
+#HeaderAvatar{
+    width: 32px;
+    height: 32px;
+    display: block;
+    float: left;
+    margin-top:4px;
+}
+
+#HeaderUsername{
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 350px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 11px;
+    color: rgb(80,80,80);
+    font-size: 17px;
+  }
+
+#HeaderLogoutLinkArea {
+    display: block;
+    cursor: pointer;
+    padding: 11px 0px;
+    float: right;
+}
+
+#HeaderLogoutLinkArea:hover {
+    background-color:rgb(200,200,200);
+}
+
+#HeaderLogoutLink {
+    display: block;
+    margin: 0px;
+    float: left;
+    padding: 0px 10px;
+    border-radius: 2px;
+    font-size: 15px;
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+#LeftSection {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    width:246px;
+}
+
+#LeftSectionRelative {
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+#ChatroomWrapper {
+    cursor:pointer;
+    position:absolute;
+    top:0px;
+    width:195px;
+    height:28px;
+    padding:5px;
+    color: rgb(59, 89, 152);
+    background-color:#fff;
+    border:1px solid rgb(177, 193, 213);
+    overflow: hidden;
+}
+
+#ChatroomWrapper:hover {
+    background-color:#ddd;
+}
+
+.ChatroomWrapperFocused {
+    cursor:default !important;
+    color:#fff !important;
+    background-color:rgb(108,147,210) !important;
+}
+
+.ChatroomWrapperFocused:hover {
+    background-color:rgb(108,147,210) !important;
+}
+
+#ChatroomWrapperIcon {
+    width:100%;
+    height:100%;
+}
+
+#ChatroomWrapperLabel {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    margin-top: 8px;
+    font-size: 16px;
+    text-align: left;
+    position: absolute;
+    left: 40px;
+    right: 25px;
+    word-wrap: break-word;
+}
+
+#ChatroomWrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 49px;
+    width: 234px;
+    height: 155px;
+    padding: 5px;
+    background-color: #FFF;
+    border: 1px solid #B1C1D5;
+    color: #6684C3;
+}
+
+#ChatroomWrapperIconWrapper {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABZ0RVh0Q3JlYXRpb24gVGltZQAwOC8xOC8wOaw6EPwAAAAJUExURf///0hISP///6vHZBQAAAABdFJOUwBA5thmAAAAIElEQVQY02NgDQUDBwYEYxUIrCSbsRJkzMBLkcdADw0AFT15ZDOgMLUAAAAASUVORK5CYII=");
+    float: left;
+    width: 24px;
+    height: 27px;
+    padding: 3px;
+    border-radius: 3px;
+    top: 9px;
+    position: absolute;
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    left: 8px;
+}
+
+#ChatroomWrapperEnvelope{
+    display: none;
+    position: absolute;
+    right: 5px;
+    width: 16px;
+    height: 11px;
+    margin-top: 12px;}
+
+#ChatroomOptionsWrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    left: 206px;
+    width: 38px;
+    height: 38px;
+    background-color: #fff;
+    border: 1px solid rgb(177, 193, 213);
+}
+
+#ChatroomOptionsWrapper:hover{
+    background-color:#ddd;
+}
+
+#ChatroomOptionsIcon {
+    padding: 10px;
+    padding-top: 14px;
+    width: 17px;
+    height: 10px;
+}
+
+#ChatroomOptionsPopup {
+    z-index:4;
+    position:absolute;
+    top:40px;
+    width:244px;
+    background-color:#fff;
+    display: none;
+    border: 1px solid rgb(75, 121, 161);
+}
+
+#ChatroomNameWrapper {
+    position: absolute;
+    top: 0px;
+    height: 41px;
+    background-color: #FFF;
+    border: 1px solid #B1C1D5;
+    width: 244px;
+    font-weight: bold;
+}
+
+#ChatroomDescription {
+    padding: 6px 12px;
+}
+
+#UserSearchInput{
+   font-family: inherit;
+    outline: none;
+    border: 0px;
+    margin:0px;
+    padding:0px 0px 0px 5px;
+    width: 200px;
+    font-size: 15px;
+    float: left;
+    height: 38px;}
+
+#UserSearchSubmit{
+    cursor: pointer;
+    height: 100%;
+    width: 38px;
+    float: right;
+    border-left: 1px solid rgb(220,220,220);}
+
+#UserSearchSubmit:hover{
+    background-color:#ddd;}
+
+#UserSearchSubmitImg{
+    width: 20px;
+    height: 20px;
+    margin: 9px;}
+
+#UserSearchResult .loading-icon-wrapper {
+  width: 100%;
+  height: 20px;
+  text-align:center;
+}
+
+#UserSearchResult .loading-icon {
+  display:inline-block;
+}
+
+#UserSearchResult {
+    width:300px;
+    background-color:#fff;
+    position:absolute;
+    top:83px;
+    z-index:3;
+    visibility: hidden;
+    border: 1px solid rgb(75, 121, 161);
+    max-height:160px;
+    overflow-y:auto;
+    color:rgb(136,99,21);
+    font-size: 12px;}
+
+#UserSearchResultErrorWrapper{
+    color:rgb(136,99,21);
+    font-family:arial,geneva,sans-serif;
+    padding:5px;
+    font-style:italic;
+    font-size:13px;}
+
+#ChatroomName {
+    position: absolute;
+    height: 41px;
+    width: 244px;
+    font-weight: bold;
+    border: 0px solid rgb(177, 193, 213);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 41px;
+}
+
+#UsersList {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 222px;
+    width: 244px;
+    bottom: 0px;
+    background-color: #FFF;
+    border: 1px solid #B1C1D5;
+}
+
+.UsersListLayer{
+    display:block;
+}
+
+.UsersListHeader{
+    width: 100%;
+    height: 20px;
+    color: rgb(176, 129, 28);
+    font-style: italic;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+    overflow:hidden;}
+
+.UsersListUserWrapper{
+    overflow:hidden;
+    cursor: pointer;
+    clear:both;
+    width: 100%;
+    height: 32px;}
+
+.UsersListUserWrapper:hover{
+    background-color:#ddd;}
+
+.UsersListUserWrapperSelf{
+    background-color: rgb(242, 228, 200);}
+
+.UsersListUsername{
+    font-family: verdana, geneva, sans-serif;
+    overflow-x: hidden;
+    overflow-y: visible;
+    text-overflow: ellipsis;
+    white-space: pre;
+    cursor: pointer;
+    margin-top: 7px;
+    color: rgb(59, 89, 152);
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    position: absolute;
+    left: 40px;
+    right: 20px;
+}
+
+.UsersListAvatar{
+    cursor: pointer;
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin: 2px 8px 2px 4px;}
+
+.UsersListStarIcon{
+    width: 10px;
+    height: 10px;
+    float: right;
+    margin-top: 9px;
+    margin-right: 5px;}
+
+.UsersListOnlineIcon{
+    width: 8px;
+    height: 8px;
+    float: right;
+    margin-top: 11px;
+    margin-right: 8px;}
+
+#RightSection{
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    right:0px;
+    width:748px;}
+
+#RightSectionRelative{
+    position:relative;
+    width:100%;
+    height:100%;}
+
+#ChatBoxContainer{
+    position:absolute;
+    padding: 20px;
+    left:0px;
+    right:0px;
+    top: 0px;
+    bottom:85px;
+    overflow:hidden;
+    background-color:#fff;
+    border:1px solid rgb(177, 193, 213);}
+
+#ChatBoxContainerRelative {
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.ChatBoxLayerMessages {
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    resize: none;
+    z-index: 1;
+    display: block;
+    position: absolute;
+}
+
+.ChatBoxLayerMessagesDisabled{ /* todo: hackyish */
+    z-index:0;}
+
+.ChatBoxLayerConversationPermissionsMessage{
+    display:none;
+    z-index:2;
+    overflow:hidden;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    /* Set opacity, copy style from elsewhere since it was Internet Explorer safe. */
+    background-color:#fff;}
+
+#InputTextWrapper {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 77px;
+    background-color: #FFF;
+    border: 1px solid #B1C1D5;
+}
+
+#InputTextArea {
+    font-family: inherit;
+    outline: medium none;
+    position: absolute;
+    bottom: 0px;
+    height: 66px;
+    width: 740px;
+    right: 0px;
+    resize: none;
+    word-wrap: break-word;
+    border: 0px solid;
+    font-size: 16px;
+    padding: 2px 110px 0px 7px;
+    color: #666;
+}
+
+#BottomWrapper {
+    position: absolute;
+    bottom: 14px;
+    left: 640px;
+    right: 14px;
+    height: 52px;
+}
+
+#InputTextOptions{
+    height:100%;
+    float:right;
+    display:inline-block;
+}
+
+#SendButton {
+    cursor: pointer;
+    float: right;
+    width: 88px;
+    height: 100%;
+    color: rgb(131, 131, 131);
+    background-color: rgb(221, 221, 221);
+    border: 1px solid rgb(204, 204, 204);
+    padding: 0px 10px;
+    margin-right: 0px;
+    font-size: 14px;
+}
+
+#SendButton:hover {
+    background-color: rgb(153, 153, 153);
+    color: rgb(238, 238, 238);
+}
+
+  /* Anything shared across website-specific pages */
+#AbsoluteWrapper{
+    font-family:verdana, geneva, sans-serif;
+    position:absolute;
+    top:41px;
+    bottom:26px;
+    left:0px;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:100%;}
+
+#RelativeWrapper{
+    overflow:hidden;
+    width:1000px;
+    position:relative;
+    height:100%;
+    margin:0px auto;}
+
+.EchatStandardTitle{
+    margin:50px 20px 20px 20px;
+    color:rgb(59, 89, 152);
+    font-family:inherit;
+    word-wrap:break-word;
+    text-align:center;
+    font-weight:bold;}
+
+.UndecoratedLink{
+    text-decoration:none;}
+
+.LinkButton{
+    cursor:pointer;
+    margin:50px auto 20px auto;
+    display:block;
+    width:auto;
+    height:25px;
+    color:#fff;
+    font-weight:bold;
+    font-size:13px;
+    background-color: #d14836;
+    border-radius: 2px;
+    border: 1px solid rgb(171,56,39);}
+
+.LinkButton:hover{
+    text-decoration:underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

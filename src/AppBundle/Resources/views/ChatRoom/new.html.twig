@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('/css/main.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body -%}
+    <h1>Create New Chat</h1>
+    <br><br><br>
+    <h3>Sorry, but this feature is not available at the moment.</h3>
+    <h3>Please, contact the developer.</h3>
+    <ul class="footer">
+    <p class="footer"><a href="{{ path('chatroom_pool') }}">Back to chatroom pool</a></b>
+{% endblock %}

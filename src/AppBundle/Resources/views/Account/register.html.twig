@@ -1,0 +1,43 @@
+{# src/AppBundle/Resources/views/Account/register.html.twig #}
+{% block stylesheets %}
+    <link href="{{ asset('/css/main.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block body -%}
+<h1>Register with us</h1>
+        <table class="left border">
+            <tr>
+               <td>
+            <ul>
+            <li>Usernames may contain only digits, upper and lowercase letters and underscores</li>
+            <li>Emails must have a valid email format</li>
+            <li>Passwords must be at least 6 characters long</li>
+            <li>Passwords must contain
+                <ul>
+                    <li>At least one uppercase letter (A..Z)</li>
+                    <li>At least one lowercase letter (a..z)</li>
+                    <li>At least one number (0..9)</li>
+                </ul>
+            </li>
+            <li>Your password and confirmation must match exactly</li>
+            </ul>
+            </td>
+            </tr>
+        </table><br>
+            <table class="border">
+                <tr>
+                   <td>
+                    {% block content %}
+                        {# render the form #}
+                        {{ form(form) }}
+                    {% endblock %}
+                   </td>
+                </tr>
+            </table><br>
+
+
+        <p class="footer">Return to the <a href="{{ path('login_route') }}">login page</a>.</p>
+        {#{{ form(form) }}#}
+{% endblock %}
+

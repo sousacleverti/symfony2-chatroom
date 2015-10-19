@@ -1,0 +1,48 @@
+chatroom_pool:
+    path: /chat
+    defaults: { _controller: "AppBundle:ChatRoom:index" }
+
+chatroom_show:
+    path: /show/{id}
+    defaults: { _controller: "AppBundle:ChatRoom:show" }
+
+chatroom_new:
+    path: /new
+    defaults: { _controller: "AppBundle:ChatRoom:new" }
+
+receive_message:
+    path: /msg
+    defaults: { _controller: "AppBundle:ChatRoom:msg" }
+    requirements: { _method: post }
+
+
+
+
+chatroom_delete:
+    path: /delete/{id}
+    defaults: { _controller: "AppBundle:ChatRoom:delete" }
+    requirements: { _method: post|delete }
+
+logout:
+    path: /logout
+
+login_route_base:
+    path: /
+    defaults: { _controller: "AppBundle:Security:login" }
+
+login_route:
+    path: /login
+    defaults: { _controller: "AppBundle:Security:login" }
+
+login_check:
+    path: /login_check
+    # no controller is bound to this route
+    # as it's handled by the Security system
+
+account_register:
+    path:     /register
+    defaults: { _controller: AppBundle:Account:register }
+
+account_create:
+    path:     /register/create
+    defaults: { _controller: AppBundle:Account:create }

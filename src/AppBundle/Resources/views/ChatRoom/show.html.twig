@@ -1,0 +1,111 @@
+{# {% extends '::base.html.twig' %} #}
+
+{% block stylesheets %}
+    <!-- Include CSS from AppBundle/Resources/public/css/ -->
+    {% stylesheets '@AppBundle/Resources/public/css/chatroom.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+<div id="Header">
+    <div id="HeaderRelativeWrapper">
+        <div id="HeaderUserArea" title="Currently logged in as {{ app.user }}">
+            <img id="HeaderAvatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADiElEQVR42r2WeUgUcRTH38zu5o73uXmbUdmpaQopBREVSGHk1UEURSQdYv4RJaUhgRGYaEokRRRGKptRYUFEoVQkWFaYZZK3ea1oXnu6O70Zj99urua6OQ9+O7O/4/0+833v92YoQHukGJJTQMWBQGZgDUyczEnD3VPcT1nPoBwEBGBZlon3NAKQd/2WAyUcABIwCV7OBKC0c0DQELDAMnu9XQhASUf/uALsRM8CX7kQ7Pd1JQAP2vtRARA0Bw74uxGA+619gofgYIA7AShq7sMQWKYANdEM81TgUKAHAbjXpDAbAjsxDbYiGhSaMZN+DxsxRHnYg71YBL1qHbxVjIBKT1AcJSKQScXQpdLB6Nh0RE6Bw0tlBODuz95pCshsJLDDywlonNE4ooF3imG+n8YW6+/Kg01a66gGKnvHx51w810+ziCiKNAaWHjaMQBKvSkEp8CRZYsJwJ2GHjnOjzNO1jBXOwh2seUXcI6Km/v4fk6VhAA3E4cjOj2UtfXz40GOUoj0cJgaq+geghYENDkMCHB0hScBuP2je1oI3KUSiPZ1BjGS1Q+q4P3EE+JfiF/ixss/aU3DaqjEjThzQAV2o0ISlE6NT/4YwVR/hYELwbEgLwJw63un2UrIoMxc69ea5oA75sAmTyde7k6lFt70DPGbTRoHJ2Mk0IVjKr2ZHGCBOb7KCKDwW6fAdQCYpDXeBODm11/4MhIQAMU9sdaHANyo7eAVEKgS80l4MtiPABR8aedPgXDvAmBOhxgB5H9qs7gSWhkDJjnUnwDk1bQKHAJgUjYEEIDcDy2CKsAaWCY1IpAAZFc1lmIdSBAqB5SjWiZj60oCcOllnUSp1K3XavWRBr0hEudtxO6AhVJAJKJi8hLCy6cAzNmp4mpvPBkcSOREC8Mm/U8MVQX7IqJmBZgGVFK9CCUMRahJIA7Ob74ENE1tu54Y/nrOAOYsRf7R18FBmiuR0LGWJAEWoi6NRpd0ZWdwuVUAnGVVNuRgAp+Z4/RhVDAbN805v3n5KIAFIZjJMl/V56DTfwHo8JuzkKLh8sUtQQrjAasB0l/UIcCMCnCac2X+Qub21Y3mJlgNkPasNgedmADwkaagAr2fy4peVz3beqsBzj75jABGClBQi07TrsaEPJ/LeqsBUh/WYBLyCrTjNYOmqKJre0Ln/LVuNUByaXU6ulHjJ2B+XmK42tL1fwBxw5wwjgCRRgAAAABJRU5ErkJggg==" />
+            <strong>
+                <div id="HeaderUsername">{{ app.user }}</div>
+            </strong>
+        </div>
+        <div id="HeaderLogoutLinkArea">
+            <div id="HeaderLogoutLink"><a href="{{ path('logout') }}">Logout</a></div>
+        </div>
+    </div>
+</div>
+
+<div id="Footer">
+    <a href="{{ path('chatroom_pool') }}">
+        Find chatrooms
+    </a>
+    <a href="{{ path('chatroom_new') }}">
+        Create new chatroom
+    </a>
+    <a href="{{ path('chatroom_new') }}">
+        Delete chatroom
+    </a>
+    <a href="http://www.bigbluebug.com/contact-us" target="_blank">
+        Report bug
+    </a>
+    <a href="mailto: ricardo.sousa@cleverti.com" target="_blank">
+        Contact developer
+    </a>
+</div>
+
+<div id="AbsoluteWrapper">
+    <div id="RelativeWrapper">
+        <audio id="ConversationMessageBeep" style="display:none;"></audio>
+
+        <div id="LeftSection">
+            <div id="LeftSectionRelative">
+                <div id="ChatroomWrapper" title="Chatroom description">
+                    <div id="ChatroomDescription">{{ chatroom.description }}</div>
+                </div>
+
+                <div id="ChatroomNameWrapper">
+                    <div id="ChatroomName" title="Chatroom name">{{ chatroom.name }}</div>
+                </div>
+
+                <div id="UsersList">
+                    <div id="UsersListContainer">
+                        <div class="UsersListLayer" id="UsersListChatroom">
+                            <ul id="UsersListUl">
+                                <li>User Name 1</li>
+                                <li>User Name 2</li>
+                                <li>User Name 3</li>
+                                <li>User Name 4</li>
+                                <li>User Name 5</li>
+                                <li>User Name 6</li>
+                                <li>User Name 7</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="RightSection">
+            <div id="RightSectionRelative">
+
+                <div id="ChatBoxContainer">
+                    <div id="ChatBoxContainerRelative">
+                        <div class="ChatBoxLayerMessages" id="ChatroomChatBox">
+                            {{ chatroom.text | raw }}
+                        </div>
+                    </div>
+                </div>
+
+                <div id="InputTextWrapper">
+                    <textarea id="InputTextArea" maxlength="2000"></textarea>
+                </div>
+
+                <div id="BottomWrapper">
+                    <div id="NotificationArea"></div>
+
+                    <div id="InputTextOptions">
+                        <button id="SendButton">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span id="msgPath" data-id="{{ path('receive_message') }}"></span>
+
+{% if app.user == 'admin' %}
+    {{ form(delete_form) }}
+{% endif %}
+
+<!-- Include Javascript from AppBundle/Resources/public/js/ -->
+{% block javascripts %}
+    {% javascripts '@AppBundle/Resources/public/js/*' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

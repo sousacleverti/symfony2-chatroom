@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <!-- Include CSS from AppBundle/Resources/public/css/ -->
+    {% stylesheets '@AppBundle/Resources/public/css/main.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body -%}
+    <h1>Chat Rooms Available</h1>
+    <p><strong>{{ app.user }}</strong>, be welcome to Symfony2 Chat Room App</p>
+    <ul>
+        {% for chatroom in chatrooms %}
+            <li>{{ chatroom.name }} -
+                <a href="{{ path('chatroom_show', {'id': chatroom.id}) }}">Enter Chat Room</a>
+            </li>
+        {% endfor %}
+    </ul><br><br>
+    <p><a href="{{ path('chatroom_new') }}">Create New Chat Room</a></p>
+    <p class="footer"><a href="{{ path('logout') }}">Logout</a></p>
+{% endblock %}
