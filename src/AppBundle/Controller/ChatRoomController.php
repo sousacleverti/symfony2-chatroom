@@ -56,6 +56,22 @@ class ChatRoomController extends Controller {
         $chatroom->setText($chatroom->getText() . $params['msg']);
         $em->flush();
 
+        /** Ver anotations para fazer cascade (gravar em cascata os objetos) **/
+        /*********************************************************/
+        $em = $this->getDoctrine()->getManager();
+        $chatroom = $em->getRepository('AppBundle:ChatRoom')->findOneBy(array('name' => $params['chatroom']));
+
+        $message = new \AppBundle\Entity\Message();
+        $message->setCreatedAt();
+        $message->setCreatedBy($params['user']);
+        $message->setText($params['msg']);
+
+        $chatroom->getMessages()->add($message);
+
+        $em->persist($chatroom);
+        $em->flush();
+        /*********************************************************/
+
         $response = new Response(json_encode(array('OK' => '')));
         $response->headers->set('Content-Type', 'application/json');
 
