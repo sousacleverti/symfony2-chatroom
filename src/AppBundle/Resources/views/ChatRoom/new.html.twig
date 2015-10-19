@@ -1,7 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-    <link href="{{ asset('/css/main.css') }}" type="text/css" rel="stylesheet" />
+    <!-- Include CSS from AppBundle/Resources/public/css/ -->
+    {% stylesheets '@AppBundle/Resources/public/css/main.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}
 
 {% block body -%}

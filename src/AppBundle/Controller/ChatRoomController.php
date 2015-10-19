@@ -57,6 +57,7 @@ class ChatRoomController extends Controller {
         $em->flush();
 
         /** Ver anotations para fazer cascade (gravar em cascata os objetos) **/
+        /* FIRST COMMIT SAVED FROM HOME :) */
         /*********************************************************/
         $em = $this->getDoctrine()->getManager();
         $chatroom = $em->getRepository('AppBundle:ChatRoom')->findOneBy(array('name' => $params['chatroom']));
