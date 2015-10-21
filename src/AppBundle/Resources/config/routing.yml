@@ -11,12 +11,14 @@ chatroom_new:
     defaults: { _controller: "AppBundle:ChatRoom:new" }
 
 receive_message:
-    path: /msg
+    path: /msg/receive
     defaults: { _controller: "AppBundle:ChatRoom:msg" }
     requirements: { _method: post }
-
-
-
+    
+update_message:
+    path: /msg/update
+    defaults: { _controller: "AppBundle:ChatRoom:update" }
+    requirements: { _method: post }
 
 chatroom_delete:
     path: /delete/{id}

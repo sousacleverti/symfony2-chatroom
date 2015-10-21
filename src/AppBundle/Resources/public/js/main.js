@@ -1,10 +1,12 @@
 var msgPath = $('#msgPath').data('id');
+var getMsgPath = $('#getMsgPath').data('id');
+
 var ita = $("#InputTextArea");
 var chatBox = $('#ChatroomChatBox');
 var username = $('#HeaderUsername').text();
 var chatroomName = $('#ChatroomName').text();
 var crDescription = $('#ChatroomWrapper');
-
+var lastReceivedMessageTime = '';
 /**
  *
  *
@@ -19,7 +21,7 @@ $(document).ready(function(){
     /**TODO: check if the server has new messages,
              and only if so, refresh the page **/
     // refresh the ENTIRE conversation... OMG...
-    setInterval(refreshConversations, 2000);
+    setInterval(checkForNewMessagesFromServer, 2000);
 });
 
 /* Handle enter key pressed in textarea */
@@ -80,11 +82,15 @@ function scrollDownChatBox() {
 /* Server response callback missing... */
 function handleUserInput() {
     var formatedMsg = formatUserInput(ita.val());
+    if(formatedMsg.length == 0) return;
+    // Remove user input text from textarea
+    ita.val('');
     var data = {
         'chatroom': chatroomName,
         'user': username,
         'msg': formatedMsg
     };
+    // POST user message to the server controller
     $.ajax({
         url: msgPath,
         type: 'POST',
@@ -99,34 +105,49 @@ function handleUserInput() {
         // redirect user to chatroom pool
         $(location).attr('href', '/chat');
     });
-    // Remove user input text from textarea
-    ita.val('');
+
     // Must update chatroom...
 }
 
-/* TODO*/
-/* Before posting, request server time... */
+/* Perform a simple filtration to the user input */
 function formatUserInput(input) {
-    var currentdate = new Date();
-    var h = currentdate.getHours();
-    var m = currentdate.getMinutes();
-    var s = currentdate.getSeconds();
-    var datetime = '[' + currentdate.getDate() + '-'
-            + (currentdate.getMonth() + 1) + '-'
-            + currentdate.getFullYear()
-            + "<strong>@</strong>"
-            + (h < 10 ? '0' + h : h) + ':'
-            + (m < 10 ? '0' + m : m) + ':'
-            + (s < 10 ? '0' + s : s) + ']';
-
-    var preFormated = datetime + '<strong> ' + username +
-            '</strong>: ' + input + '<br>';
-    return preFormated.replace(/(\r\n|\n|\r)/gm, "");
+    return input.replace(/(\r\n|\n|\r)/gm, "");
 }
 
 /* TODO*/
-/* Temporary solution!!!!!! */
-function refreshConversations() {
-    chatBox.load(location.href + ' #ChatroomChatBox');
+function refreshConversations(messages) {
+    for(i = 0; i < messages.length; i++) {
+        chatBox.append(messages[i]);
+        console.log(messages[i]);
+    }
     scrollDownChatBox();
+}
+
+/*
+ * Asks the server for new messages
+ */
+function checkForNewMessagesFromServer() {
+    var data = {
+        'chatroom': chatroomName,
+        'lastMessageReceived': lastReceivedMessageTime
+    };
+    $.ajax({
+        url: getMsgPath,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        dataType: 'json'
+    }).done(function (response) {
+        // if new messages are returned by the server,
+        // refresh the conversations container
+        if(response['msg'].length > 0) {
+            refreshConversations(response['msg']);
+            lastReceivedMessageTime = response['lastMsgTime']
+        }
+    }).fail(function() {
+        alert( "Sorry, but some problem has occured...\n\n\
+                Please, send a bug report.");
+//        // redirect user to chatroom pool
+//        $(location).attr('href', '/chat');
+    });
 }

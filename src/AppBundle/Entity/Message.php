@@ -22,7 +22,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="message")
  */
 class Message {
+    /**
+     * Allowed tags in user message
+     *
+     * @var string
+     */
+    protected $allowedTags = '<img>';
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ChatRoom", inversedBy="messages")
+     * @ORM\JoinColumn(name="chatroom_id", referencedColumnName="id")
+     **/
+    private $chatroom;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -33,7 +44,7 @@ class Message {
     /** @ORM\Column(type="string", name="text") */
     protected $text;
 
-    /** @ORM\Column(type="string", name="posted_by") */
+    /** @ORM\Column(type="string", name="created_by") */
     protected $createdBy;
 
     /**
@@ -54,6 +65,34 @@ class Message {
      */
     protected $updatedAt;
 
+     /**
+     * Get formattedText
+     *
+     * Formats this message text with html, in order to
+     * be presented to the user at the client side
+     *
+     * @return string
+     */
+    public function getFormattedText() {
+        // [dd-mm-aaaa@hh:mm:ss] userName:
+        $date = $this->createdAt->format("d-m-Y"); // full year format
+        $time = $this->createdAt->format("H:m:s"); // 24H format
+        return '[' . $date . '<strong>@</strong>' . $time . '] <strong>' .
+                $this->createdBy . '</strong>: ' . $this->text . '<br>';
+    }
+
+     /**
+     * injectionFilter
+     *
+     * filters the input string and prevents any user from
+     * performing code injection
+     *
+     * @return string
+     */
+    private function injectionFilter($text) {
+        // TODO: implement a good code injection filter
+        return \strip_tags($text);
+    }
     /**
      * Set createdAt
      *
@@ -111,7 +150,7 @@ class Message {
      */
     public function setText($text)
     {
-        $this->text = $text;
+        $this->text = $this->injectionFilter($text);
 
         return $this;
     }
@@ -148,5 +187,29 @@ class Message {
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set chatroom
+     *
+     * @param ChatRoom $chatroom
+     *
+     * @return Message
+     */
+    public function setChatRoom($chatroom)
+    {
+        $this->chatroom = $chatroom;
+
+        return $this;
+    }
+
+    /**
+     * Get chatroom
+     *
+     * @return ChatRoom
+     */
+    public function getChatRoom()
+    {
+        return $this->chatroom;
     }
 }

@@ -20,7 +20,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="chatroom")
  */
 class ChatRoom {
 
@@ -53,12 +52,12 @@ class ChatRoom {
     protected $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="ChatRoom", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="User", mappedBy="chatroom", cascade={"persist", "remove"})
      */
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="ChatRoom", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="chatroom", cascade={"persist", "remove"})
      */
     protected $messages;
 

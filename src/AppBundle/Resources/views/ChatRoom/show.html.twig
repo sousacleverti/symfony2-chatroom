@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     <!-- Include CSS from AppBundle/Resources/public/css/ -->
-    {% stylesheets '@AppBundle/Resources/public/css/chatroom.css' filter='cssrewrite' %}
+    {% stylesheets filter='yui_css' '@AppBundle/Resources/public/css/chatroom.css'  %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
@@ -77,7 +77,7 @@
                 <div id="ChatBoxContainer">
                     <div id="ChatBoxContainerRelative">
                         <div class="ChatBoxLayerMessages" id="ChatroomChatBox">
-                            {{ chatroom.text | raw }}
+                           {# {{ chatroom.text | raw }} #}
                         </div>
                     </div>
                 </div>
@@ -98,14 +98,15 @@
     </div>
 </div>
 <span id="msgPath" data-id="{{ path('receive_message') }}"></span>
+<span id="getMsgPath" data-id="{{ path('update_message') }}"></span>
 
 {% if app.user == 'admin' %}
     {{ form(delete_form) }}
 {% endif %}
 
-<!-- Include Javascript from AppBundle/Resources/public/js/ -->
+{# Include Javascript from AppBundle/Resources/public/js/ #}
 {% block javascripts %}
-    {% javascripts '@AppBundle/Resources/public/js/*' %}
+    {% javascripts filter='yui_js' '@AppBundle/Resources/public/js/*' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
