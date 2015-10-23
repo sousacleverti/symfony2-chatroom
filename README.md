@@ -8,6 +8,4 @@ A work in progress...
 
 ---
 
-## Screenshot 23-10-2015@14:17
-
-<img src="./Screenshot.png">
+![Screenshot 23-10-2015@14:17](./Screenshot.png?raw=true "Screenshot 23-10-2015@14:17")
