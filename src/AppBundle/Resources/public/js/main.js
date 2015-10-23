@@ -6,7 +6,7 @@ var chatBox = $('#ChatroomChatBox');
 var username = $('#HeaderUsername').text();
 var chatroomName = $('#ChatroomName').text();
 var crDescription = $('#ChatroomWrapper');
-var lastReceivedMessageTime = '';
+var lastMessageTimeStamp = '';
 /**
  *
  *
@@ -16,12 +16,12 @@ var lastReceivedMessageTime = '';
  */
 
 /* STARTUP ACTIONS */
-$(document).ready(function(){
+$(document).ready(function () {
     scrollDownChatBox();
     /**TODO: check if the server has new messages,
-             and only if so, refresh the page **/
+     and only if so, refresh the page **/
     // refresh the ENTIRE conversation... OMG...
-    setInterval(checkForNewMessagesFromServer, 2000);
+    setInterval(checkForNewMessagesFromServer, 700);
 });
 
 /* Handle enter key pressed in textarea */
@@ -35,7 +35,7 @@ ita.keyup(function (e) {
 });
 
 /* Allways scroll the chatbox to the bottom */
-chatBox.change(function() {
+chatBox.change(function () {
     scrollDownChatBox();
 });
 
@@ -78,11 +78,12 @@ function scrollDownChatBox() {
     chatBox.scrollTop(chatBox.prop("scrollHeight"));
 }
 
-/* TODO*/
-/* Server response callback missing... */
+/*
+ * Handle user input in text box
+ */
 function handleUserInput() {
     var formatedMsg = formatUserInput(ita.val());
-    if(formatedMsg.length == 0) return;
+    if (formatedMsg.length == 0) return;
     // Remove user input text from textarea
     ita.val('');
     var data = {
@@ -99,11 +100,8 @@ function handleUserInput() {
         dataType: 'json'
     }).done(function () { // Server response - 200 OK
         refreshConversations();
-    }).fail(function() {
-        alert( "Sorry, but some problem has occured...\n\n\
-        Please, send a bug report.");
-        // redirect user to chatroom pool
-        $(location).attr('href', '/chat');
+    }).fail(function () {
+        checkOnServer();
     });
 
     // Must update chatroom...
@@ -114,13 +112,18 @@ function formatUserInput(input) {
     return input.replace(/(\r\n|\n|\r)/gm, "");
 }
 
-/* TODO*/
-function refreshConversations(messages) {
-    for(i = 0; i < messages.length; i++) {
-        chatBox.append(messages[i]);
-        console.log(messages[i]);
+/* Refresh chatroom conversations container */
+function refreshConversations(response) {
+    var resp = response['msg'];
+    var r = resp.length;
+    // if new messages are returned by the server,
+    // refresh the conversations container
+    if (r > 0) {
+        for (i = 0; i < r; i++)
+            chatBox.append(resp[i]);
+        lastMessageTimeStamp = response['lastMsgTime'];
+        scrollDownChatBox();
     }
-    scrollDownChatBox();
 }
 
 /*
@@ -129,7 +132,7 @@ function refreshConversations(messages) {
 function checkForNewMessagesFromServer() {
     var data = {
         'chatroom': chatroomName,
-        'lastMessageReceived': lastReceivedMessageTime
+        'lastMessageReceived': lastMessageTimeStamp
     };
     $.ajax({
         url: getMsgPath,
@@ -138,16 +141,33 @@ function checkForNewMessagesFromServer() {
         data: JSON.stringify(data),
         dataType: 'json'
     }).done(function (response) {
-        // if new messages are returned by the server,
-        // refresh the conversations container
-        if(response['msg'].length > 0) {
-            refreshConversations(response['msg']);
-            lastReceivedMessageTime = response['lastMsgTime']
-        }
-    }).fail(function() {
-        alert( "Sorry, but some problem has occured...\n\n\
-                Please, send a bug report.");
-//        // redirect user to chatroom pool
-//        $(location).attr('href', '/chat');
+        refreshConversations(response);
+    }).fail(function () {
+        checkOnServer();
     });
 }
+
+/*
+ * Confirms if the server is still replying to requests
+ */
+function checkOnServer() {
+    $.ajax({
+        url: msgPath,
+        type: 'POST',
+        contentType: 'application/json',
+        data: "",
+        dataType: 'json'
+    }).done(function () { // Server response - 200 OK
+        return;
+    }).fail(function () {
+        alert("Sorry, but some problem has occured...\n\n\
+                Please, send a bug report.");
+        // refresh page
+        location.reload();
+    });
+}
+
+
+
+
+
