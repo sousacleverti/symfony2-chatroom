@@ -17,10 +17,6 @@ var lastMessageTimeStamp = '';
 
 /* STARTUP ACTIONS */
 $(document).ready(function () {
-    scrollDownChatBox();
-    /**TODO: check if the server has new messages,
-     and only if so, refresh the page **/
-    // refresh the ENTIRE conversation... OMG...
     setInterval(checkForNewMessagesFromServer, 700);
 });
 
@@ -32,11 +28,6 @@ ita.keyup(function (e) {
     // and firing more than once
     e.preventDefault();
     e.stopImmediatePropagation();
-});
-
-/* Allways scroll the chatbox to the bottom */
-chatBox.change(function () {
-    scrollDownChatBox();
 });
 
 /* Handle send button click */
@@ -75,7 +66,9 @@ crDescription.click(function (e) {
 
 /* Scroll the chatbox to the bottom */
 function scrollDownChatBox() {
-    chatBox.scrollTop(chatBox.prop("scrollHeight"));
+    var chatScroll = $('#ChatBoxContainerRelative');
+    var height = chatScroll[0].scrollHeight;
+    chatScroll.scrollTop(height);
 }
 
 /*
@@ -83,7 +76,8 @@ function scrollDownChatBox() {
  */
 function handleUserInput() {
     var formatedMsg = formatUserInput(ita.val());
-    if (formatedMsg.length == 0) return;
+    if (formatedMsg.length == 0)
+        return;
     // Remove user input text from textarea
     ita.val('');
     var data = {
@@ -149,22 +143,25 @@ function checkForNewMessagesFromServer() {
 
 /*
  * Confirms if the server is still replying to requests
+ * TODO: Enhance this function...
  */
 function checkOnServer() {
-    $.ajax({
-        url: msgPath,
-        type: 'POST',
-        contentType: 'application/json',
-        data: "",
-        dataType: 'json'
-    }).done(function () { // Server response - 200 OK
-        return;
-    }).fail(function () {
-        alert("Sorry, but some problem has occured...\n\n\
+    setTimeout(function () {
+        $.ajax({
+            url: msgPath,
+            type: 'POST',
+            contentType: 'application/json',
+            data: "",
+            dataType: 'json'
+        }).done(function () { // Server response - 200 OK
+            return;
+        }).fail(function () {
+            alert("Sorry, but some problem has occured...\n\n\
                 Please, send a bug report.");
-        // refresh page
-        location.reload();
-    });
+            // refresh page
+            location.reload();
+        });
+    }, 1000);
 }
 
 

@@ -794,7 +794,6 @@ ul li {
 }
 
 .ChatBoxLayerMessages {
-    bottom: 0px;
     left: 0px;
     right: 0px;
     resize: none;
@@ -803,8 +802,9 @@ ul li {
     position: absolute;
 }
 
-.ChatBoxLayerMessagesDisabled{ /* todo: hackyish */
-    z-index:0;}
+.ChatBoxLayerMessagesDisabled { /* todo: hackyish */
+    z-index:0;
+}
 
 .ChatBoxLayerConversationPermissionsMessage{
     display:none;
@@ -852,7 +852,7 @@ ul li {
     height: 52px;
 }
 
-#InputTextOptions{
+#InputTextOptions {
     height:100%;
     float:right;
     display:inline-block;
@@ -877,7 +877,7 @@ ul li {
 }
 
   /* Anything shared across website-specific pages */
-#AbsoluteWrapper{
+#AbsoluteWrapper {
     font-family:verdana, geneva, sans-serif;
     position:absolute;
     top:41px;
@@ -885,27 +885,31 @@ ul li {
     left:0px;
     padding-top:10px;
     padding-bottom:10px;
-    width:100%;}
+    width:100%;
+}
 
-#RelativeWrapper{
+#RelativeWrapper {
     overflow:hidden;
     width:1000px;
     position:relative;
     height:100%;
-    margin:0px auto;}
+    margin:0px auto;
+}
 
-.EchatStandardTitle{
+.EchatStandardTitle {
     margin:50px 20px 20px 20px;
     color:rgb(59, 89, 152);
     font-family:inherit;
     word-wrap:break-word;
     text-align:center;
-    font-weight:bold;}
+    font-weight:bold;
+}
 
-.UndecoratedLink{
-    text-decoration:none;}
+.UndecoratedLink {
+    text-decoration:none;
+}
 
-.LinkButton{
+.LinkButton {
     cursor:pointer;
     margin:50px auto 20px auto;
     display:block;
@@ -916,9 +920,10 @@ ul li {
     font-size:13px;
     background-color: #d14836;
     border-radius: 2px;
-    border: 1px solid rgb(171,56,39);}
+    border: 1px solid rgb(171,56,39);
+}
 
-.LinkButton:hover{
+.LinkButton:hover {
     text-decoration:underline;
 }
 
