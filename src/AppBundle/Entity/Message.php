@@ -27,7 +27,7 @@ class Message {
      *
      * @var string
      */
-    protected $allowedTags = '<img>';
+    private $allowedTags = '<img>|<strong>|<p>|<a>';
 
     /**
      * @ORM\ManyToOne(targetEntity="ChatRoom", inversedBy="messages")
@@ -91,7 +91,7 @@ class Message {
      */
     private function injectionFilter($text) {
         // TODO: implement a good code injection filter
-        return \strip_tags($text);
+        return \strip_tags($text, $this->allowedTags);
     }
     /**
      * Set createdAt
