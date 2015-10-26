@@ -135,7 +135,7 @@ class ChatRoomController extends Controller {
         }
         // build the response
         $responseArray = array(
-            "msg" => array($messagesToReturn),
+            "msg" => empty($messagesToReturn) ? array() : array($messagesToReturn),
             "lastMsgTime" => $lastMsgTime
         );
         $response = new Response(json_encode($responseArray));

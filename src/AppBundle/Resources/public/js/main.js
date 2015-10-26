@@ -46,7 +46,7 @@ crDescription.click(function (e) {
     // and firing more than once
     e.preventDefault();
     e.stopImmediatePropagation();
-    /* generate popup */
+    /* generate window popup */
     var win = window.open("", chatroomName + " - Description",
             "toolbar=no, location=no,\n\
         directories=no, status=no, menubar=no, scrollbars=yes,\n\
