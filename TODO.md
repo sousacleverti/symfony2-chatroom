@@ -7,6 +7,9 @@
 
 
 # Implement:
+- [ ] Write a decent client-server protocol;
+- [ ] Retrieve messages using long pooling;
+- [ ] OO Js, write controllers
 - [ ] Button/checkbox in the client UI to disable autoscroll;
 - [ ] Private chatting between users;
 - [ ] Redesign UI theme, add a responsive CSS Framework (Foundation, maybe...);

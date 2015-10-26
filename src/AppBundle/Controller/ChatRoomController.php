@@ -109,7 +109,7 @@ class ChatRoomController extends Controller {
         $messagesToReturn = array();
         $lastMsgTime = '';
         //check if the room is empty
-        if (!empty($cMessages->last())) {
+        if ($cMessages->last()) {
             // Last message in the chatroom -> get its datetimezone object
             $lastMsgTime = $cMessages->last()->getCreatedAt();
             $lastClientMessageDateTime = $params['lastMessageReceived'];

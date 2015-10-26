@@ -93,12 +93,10 @@ function handleUserInput() {
         data: JSON.stringify(data),
         dataType: 'json'
     }).done(function () { // Server response - 200 OK
-        refreshConversations();
+        //refreshConversations();
     }).fail(function () {
         checkOnServer();
     });
-
-    // Must update chatroom...
 }
 
 /* Perform a simple filtration to the user input */
