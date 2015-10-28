@@ -4,12 +4,10 @@
 - [x] Chatbox: Java script update firing to many times;
 - [x] Chatbox: Auto scroll down not working;
 
-
-
 # Implement:
 - [x] Prevent user from flooding the server with too many consequent posts;
 - [ ] Write a decent client-server protocol;
-- [ ] Retrieve messages using long pooling;
+- [ ] Retrieve messages using [long pooling] or [Gos Web Socket Bundle];
 - [ ] OO Js, write controllers
 - [ ] Button/checkbox in the client UI to disable autoscroll;
 - [ ] Private chatting between users;

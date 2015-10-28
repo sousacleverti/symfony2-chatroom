@@ -22,13 +22,14 @@ $(document).ready(function () {
 });
 
 /* Handle enter key pressed in textarea */
-ita.keyup(function (e) {
-    if (e.which === 13)
+ita.keydown(function (e) {
+    if (e.which === 13) {
+        // prevent the event from propagating
+        // and firing more than once
+        e.preventDefault();
+        e.stopImmediatePropagation();
         handleUserInput();
-    // prevent the event from propagating
-    // and firing more than once
-    e.preventDefault();
-    e.stopImmediatePropagation();
+    }
 });
 
 /* Handle send button click */
@@ -76,18 +77,24 @@ function scrollDownChatBox() {
  * Handle user input in text box
  */
 function handleUserInput() {
-    if(postFloodPrevent) {
+    /*************** Prevent Flooding ****************/
+    if (postFloodPrevent) {
         alert('Calm down! Please, don\'t send messages too fast.');
         return;
     }
+    // User can only send a new message after 200 mills
     postFloodPrevent = true;
-    setTimeout(function() { postFloodPrevent = false; }, 200);
-    
+    setTimeout(function () {
+        postFloodPrevent = false;
+    }, 200);
+    /*************** Prevent Flooding ****************/
+
     var formatedMsg = formatUserInput(ita.val());
-    if (formatedMsg.length == 0)
-        return;
     // Remove user input text from textarea
     ita.val('');
+    if (formatedMsg.length == 0)
+        return;
+
     var data = {
         'chatroom': chatroomName,
         'user': username,
