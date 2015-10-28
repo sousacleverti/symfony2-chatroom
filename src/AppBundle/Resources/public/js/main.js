@@ -108,10 +108,10 @@ function handleUserInput() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         dataType: 'json'
-    }).done(function () { // Server response - 200 OK
+    }).done(function () {
         //refreshConversations();
     }).fail(function () {
-        checkOnServer();
+        //checkOnServer();
     });
 }
 
@@ -148,29 +148,6 @@ function checkForNewMessagesFromServer() {
     }).fail(function () {
         checkOnServer();
     });
-}
-
-/*
- * Confirms if the server is still replying to requests
- * TODO: Enhance this function...
- */
-function checkOnServer() {
-    setTimeout(function () {
-        $.ajax({
-            url: msgPath,
-            type: 'POST',
-            contentType: 'application/json',
-            data: "",
-            dataType: 'json'
-        }).done(function () { // Server response - 200 OK
-            return;
-        }).fail(function () {
-            alert("Sorry, but some problem has occured...\n\n\
-                Please, send a bug report.");
-            // refresh page
-            location.reload();
-        });
-    }, 1000);
 }
 
 
