@@ -89,7 +89,8 @@ function handleUserInput() {
     }, 200);
     /*************** Prevent Flooding ****************/
 
-    var formatedMsg = formatUserInput(ita.val());
+    // Perform a simple filtration to the user input
+    var formatedMsg = ita.val().replace(/(\r\n|\n|\r)/gm, "");
     // Remove user input text from textarea
     ita.val('');
     if (formatedMsg.length == 0)
@@ -112,11 +113,6 @@ function handleUserInput() {
     }).fail(function () {
         checkOnServer();
     });
-}
-
-/* Perform a simple filtration to the user input */
-function formatUserInput(input) {
-    return input.replace(/(\r\n|\n|\r)/gm, "");
 }
 
 /* Refresh chatroom conversations container */
