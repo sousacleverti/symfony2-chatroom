@@ -7,6 +7,7 @@ var username = $('#HeaderUsername').text();
 var chatroomName = $('#ChatroomName').text();
 var crDescription = $('#ChatroomWrapper');
 var lastMessageTimeStamp = '';
+var postFloodPrevent = false; // if true, prevents the user from posting
 /**
  *
  *
@@ -75,6 +76,13 @@ function scrollDownChatBox() {
  * Handle user input in text box
  */
 function handleUserInput() {
+    if(postFloodPrevent) {
+        alert('Calm down! Please, don\'t send messages too fast.');
+        return;
+    }
+    postFloodPrevent = true;
+    setTimeout(function() { postFloodPrevent = false; }, 200);
+    
     var formatedMsg = formatUserInput(ita.val());
     if (formatedMsg.length == 0)
         return;

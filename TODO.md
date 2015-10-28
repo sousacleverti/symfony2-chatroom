@@ -7,6 +7,7 @@
 
 
 # Implement:
+- [x] Prevent user from flooding the server with too many consequent posts;
 - [ ] Write a decent client-server protocol;
 - [ ] Retrieve messages using long pooling;
 - [ ] OO Js, write controllers
